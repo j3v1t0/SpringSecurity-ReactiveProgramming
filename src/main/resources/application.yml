@@ -1,0 +1,14 @@
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5434/cashnow
+    username: postgres
+    password: postgres
+
+server:
+  error:
+    include-message: always
+
+app:
+  jwt:
+    expiration-in-minute: 30
+    secret: RandomSecretKey123456789!RandomSecretKey123456789!RandomSecretKey123456789!
