@@ -27,11 +27,12 @@ public class AccountClass implements UserDetails {
     private Role roles;
     private LocalDate createdAt;
     private LocalDate lastLoginAt;
-    private Set<GrantedAuthority> authorities;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
+        //
+        return Stream.of(roles.toString()).map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
     }
 
     @Override

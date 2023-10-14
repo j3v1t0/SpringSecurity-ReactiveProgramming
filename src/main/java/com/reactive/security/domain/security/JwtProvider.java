@@ -1,6 +1,7 @@
 package com.reactive.security.domain.security;
 
 import com.reactive.security.domain.models.entities.AccountClass;
+import io.jsonwebtoken.Claims;
 
 import java.util.Date;
 import java.util.Map;
@@ -74,4 +75,6 @@ public interface JwtProvider<T> {
      * @param token Token JWT
      */
     Boolean isTokenExpired(String token);
+
+    Claims extractAllClaims(String token);
 }

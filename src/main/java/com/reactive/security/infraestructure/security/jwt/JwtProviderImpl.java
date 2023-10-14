@@ -107,7 +107,8 @@ public class JwtProviderImpl implements JwtProvider<AccountClass> {
      *
      * @param token Token JWT
      */
-    private Claims extractAllClaims(String token) {
+    @Override
+    public Claims extractAllClaims(String token) {
         return Jwts
                 .parserBuilder()
                 .setSigningKey(this.getSignInKey())
