@@ -7,6 +7,7 @@ import com.reactive.security.infraestructure.exceptions.GlobalExceptionHandlers;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,11 +23,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Primary
 @Component
 @Slf4j
 @RequiredArgsConstructor
 public class JwtAuthenticationManager implements ReactiveAuthenticationManager {
-
     private final JwtProvider jwtProvider;
 
     @Override

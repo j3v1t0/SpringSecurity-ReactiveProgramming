@@ -10,6 +10,9 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.UUID;
 
 @Entity
 @Table(name = "account")
@@ -34,4 +37,14 @@ public class AccountEntity implements Serializable {
     private LocalDate createdAt;
     @Column(name = "last_login_at", nullable = false)
     private LocalDate lastLoginAt;
+
+    public AccountEntity(String identification, String fullname, String password, Role roles) {
+        this.accountUuid = UUID.randomUUID().toString();
+        this.identification = identification;
+        this.fullname = fullname;
+        this.password = password;
+        this.roles = roles;
+        this.createdAt = LocalDate.now();
+        this.lastLoginAt = LocalDate.now();
+    }
 }

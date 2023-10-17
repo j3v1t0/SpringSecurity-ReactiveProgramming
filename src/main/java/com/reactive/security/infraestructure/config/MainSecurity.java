@@ -19,15 +19,20 @@ public class MainSecurity {
     private final SecurityContextRepository securityContextRepository;
     @Bean
     public SecurityWebFilterChain filterChain(ServerHttpSecurity httpSecurity, JwtAuthorizationFilter jwtAuthorizationFilter){
-        return httpSecurity
-                .authorizeExchange((authorizeExchange) ->
-                        authorizeExchange.pathMatchers("/auth/**"))
+         httpSecurity
+                .authorizeExchange((exchanges) ->
+                        exchanges
+                                // any URL that starts with /admin/ requires the role "ROLE_ADMIN"
+                                .pathMatchers("/auth/**").permitAll()
+                                // any other request requires the user to be authenticated
+                                .anyExchange().authenticated())
                 .csrf((csrf) -> csrf.disable())
                 .addFilterAfter(jwtAuthorizationFilter, SecurityWebFiltersOrder.FIRST)
                 .securityContextRepository(securityContextRepository)
                 .formLogin((formLogin) -> formLogin.disable()
                 .logout((logout) -> logout.disable())
-                .httpBasic((httpBasic) -> httpBasic.disable()))
-                .build();
+                .httpBasic((httpBasic) -> httpBasic.disable()));
+
+        return  httpSecurity.build();
     }
 }
